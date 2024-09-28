@@ -88,10 +88,14 @@ def test():
     """
     return '', 200
 
-@app.route("/@scan", methods=["POST"])  # This route is used to start the scan
+@app.route("/@scan", methods=["POST"])  
 def scan():
     """
-    This route checks the parameters and initiates the s 
+    This route checks the parameters and calls the scan task to perform the scan
+
+    Exceptions
+    ----------
+    ParemeterException -> Thrown if any of the parameters is either missing or invalid
     """
     try:
         if 'options' not in request.args:
@@ -118,6 +122,9 @@ def scan():
     except Exception as e:
         handle_error(e)
         return '', 400
+
+
+
 
 
 # Main #
