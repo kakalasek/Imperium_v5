@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row gx-2">
+        <div class="col">
+            {% if "no_passwords" in crack_john %}
+                <h3>No passwords were cracked</h3>
+            {% else %}
+                <h3>Cracked passwords</h3>
+                <div class="d-flex flex-column border border-dark rounded vh-100 overflow-auto p-2">
+                    {% for crack in cracks_john %}
+                        {{ crack['username'] }}: {{ crack['password'] }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

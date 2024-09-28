@@ -1,0 +1,55 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="container-fluid">
+  <div class="row gx-2">
+    <div class="col">
+      <!-- Scan Form-->
+      <form method="post" enctype="multipart/form-data">
+        {{ johnform.hidden_tag() }}
+        <div class="d-flex flex-column gap-2">
+          <div class="form-floating">
+            {{ johnform.file(class="form-control") }}
+            {{ johnform.file.label }}
+          </div>
+          <div class="form-floating">
+            {{ johnform.format(class="form-select") }}
+            {{ johnform.format.label }}
+          </div>
+          <div class="form-floating">
+            {{ johnform.attack_type(class="form-select") }}
+            {{ johnform.attack_type.label }}
+          </div>
+          <div class="form-floating">
+            {{ johnform.dictionary(class="form-control") }}
+            {{ johnform.dictionary.label }}
+          </div>
+          <div>
+            {{ johnform.submit(class='btn btn-secondary btn-lg')}}
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col">
+      <div class="container-fluid p-2 border border-dark rounded">
+        <div class="row pb-2">
+          <div class="col">
+            <button class="btn btn-primary" onclick="window.location.reload()">Refresh Database</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="d-flex flex-column border border-dark rounded vh-100 overflow-auto p-2 gap-1">
+              <!-- Cracking Attemps -->
+               {% for crack in cracks %}
+                    <div>
+                      <a href="{{ url_for('crack_john') }}?crack_john_id={{ crack['id'] }}">{{ crack["filename"] }} - {{ crack["hash_format"] }} - {{ crack["attack_type"] }}</a>
+                    </div>
+               {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
