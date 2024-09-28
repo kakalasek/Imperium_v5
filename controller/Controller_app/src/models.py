@@ -1,4 +1,4 @@
-# This file contains all the models of all the tables used in this app#
+# This file contains all the models of all the tables used in this app #
 
 # Imports #
 from flask_sqlalchemy import SQLAlchemy
